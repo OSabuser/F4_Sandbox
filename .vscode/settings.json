@@ -1,0 +1,27 @@
+{
+    "editor.formatOnSave": true,
+    "clang-format.executable": "clang-format",
+    "clang-format.style": "Google",
+    "cmakeFormat.exePath": "cmake-format",
+    "clang-tidy.executable": "clang-tidy",
+    "clang-tidy.lintOnSave": true,
+    "clang-tidy.buildPath": "build",
+    "clang-tidy.compilerArgsBefore": [
+        "--config-file=.clang-tidy",
+        "--format-style=google",
+        "--enable-check-profile",
+        "--verify-config",
+        "--export-fixes=fixes.yaml",
+    ],
+    "files.associations": {
+        "*.h": "c",
+        "*.c": "c"
+    },
+    // C/C++ IntelliSense настройки
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "C_Cpp.default.cStandard": "c11",
+    "C_Cpp.default.cppStandard": "c++17",
+    "C_Cpp.default.intelliSenseMode": "gcc-arm",
+    "C_Cpp.errorSquiggles": "enabled",
+    "C_Cpp.intelliSenseEngine": "default",
+}

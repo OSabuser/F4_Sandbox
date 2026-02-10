@@ -1,0 +1,172 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        // Очистка директории с артефактами сборки
+        {
+            "label": "Clean",
+            "group": "build",
+            "type": "shell",
+            "command": "rm -rf build",
+            "windows": {
+                "command": "rm build -Recurse -Force"
+            },
+            "options": {
+                "statusbar": {
+                    "color": "#ff8b8b",
+                    "label": "$(clear-all) Clean",
+                    "detail": "Clean ALL"
+                }
+            }
+        },
+        // Подготовка сборки в контейнере с пресетом Debug
+        {
+            "label": "Docker: Configure (Debug)",
+            "type": "shell",
+            "hide": true,
+            "command": "docker",
+            "args": [
+                "run",
+                // Автоматически удалить контейнер после выполнения
+                "--rm",
+                // Смонтировать директорию с хоста
+                "--mount",
+                "type=bind,source=${workspaceFolder},target=/usr/workspace",
+                "general_project",
+                "cmake",
+                "--preset",
+                "Debug",
+                "-DHOST_PATH=${workspaceFolder}",
+                "-DFIX_COMPILE_COMMANDS_PATHS=ON",
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "statusbar": {
+                    "color": "#ff8bd4",
+                    "label": "$(pass-filled) Docker: Configure (Debug)",
+                    "detail": "do Debug build"
+                }
+            },
+            "group": "build",
+            "problemMatcher": []
+        },
+        // Сборка проекта в контейнере Debug
+        {
+            "label": "Docker: Build (Debug)",
+            "type": "shell",
+            "hide": false,
+            "command": "docker",
+            "args": [
+                "run",
+                "--rm",
+                "--mount",
+                "type=bind,source=${workspaceFolder},target=/usr/workspace",
+                "general_project",
+                "cmake",
+                "--build",
+                "--preset",
+                "Debug"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "statusbar": {
+                    "color": "#ff8bd4",
+                    "label": "$(debug-console-view-icon) Docker: Build (Debug)",
+                    "detail": "do Debug build"
+                }
+            },
+            "group": "build",
+            "dependsOn": "Docker: Configure (Debug)",
+        },
+        // Подготовка сборки в контейнере с пресетом Release
+        {
+            "label": "Docker: Configure (Release)",
+            "type": "shell",
+            "hide": true,
+            "command": "docker",
+            "args": [
+                "run",
+                "--rm",
+                "--mount",
+                "type=bind,source=${workspaceFolder},target=/usr/workspace",
+                "general_project",
+                "cmake",
+                "--preset",
+                "Release"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "statusbar": {
+                    "color": "#ff8bd4",
+                    "label": "$(pass-filled) Docker: Configure (Release)",
+                    "detail": "do Release build"
+                }
+            },
+            "group": "build",
+            "problemMatcher": []
+        },
+        // Сборка проекта в контейнере Release
+        {
+            "label": "Docker: Build (Release)",
+            "type": "shell",
+            "hide": false,
+            "command": "docker",
+            "args": [
+                "run",
+                "--rm",
+                "--mount",
+                "type=bind,source=${workspaceFolder},target=/usr/workspace",
+                "general_project",
+                "cmake",
+                "--build",
+                "--preset",
+                "Release"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "statusbar": {
+                    "color": "#00660a",
+                    "label": "$(pass-filled) Docker: Build (Release)",
+                    "detail": "do Release build"
+                }
+            },
+            "group": "build",
+            "dependsOn": "Docker: Configure (Release)",
+        },
+        {
+            // Очистка флеш памяти целевого устройства
+            "type": "shell",
+            "label": "EraseTarget",
+            "command": "arm-none-eabi-gdb",
+            "args": [
+                "-batch",
+                "-ex",
+                "set confirm off",
+                "-ex",
+                "set tdesc filename \"\"",
+                "-ex",
+                "target extended-remote 192.168.88.222:2331",
+                "-ex",
+                "load",
+                "-ex",
+                "quit",
+                "${workspaceFolder}/build/Debug/General.elf"
+            ],
+            "problemMatcher": [],
+            "detail": "Perform chip erase operation on the remote target via openocd",
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "statusbar": {
+                    "color": "#ff0000",
+                    "label": "$(terminal-kill) EraseTarget",
+                    "detail": "Erase target's flash memory"
+                }
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+    ]
+}
