@@ -9,7 +9,7 @@ CompileFlags:
 If:
   PathExclude: "Tests/host/.*\\.c"
 CompileFlags:
-  CompilationDatabase: .
+  CompilationDatabase: build
 
 ---
 # Не ругаемся на нарушения правил нейминга в тестах
@@ -19,6 +19,7 @@ Diagnostics:
   ClangTidy:
     Remove:
       - readability-identifier-naming
+  UnusedIncludes: None
 
 ---
 
@@ -47,7 +48,7 @@ Diagnostics:
       - readability-magic-numbers
       - readability-isolate-declaration
       - bugprone-easily-swappable-parameters
-  UnusedIncludes: Strict
+  UnusedIncludes: Enabled
 InlayHints:
   Enabled: true
   ParameterNames: true

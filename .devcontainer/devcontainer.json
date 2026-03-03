@@ -5,7 +5,7 @@
     },
     "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
     "workspaceFolder": "/workspace",
-    "postCreateCommand": "cmake --preset host-debug && cmake --preset Debug",
+    "postCreateCommand": "cmake --preset host-debug && cmake --preset Debug && cp build/Debug/compile_commands.json /workspace/compile_commands.json",
     "customizations": {
         "vscode": {
             "extensions": [
@@ -25,7 +25,6 @@
                 "mcu-debug.peripheral-viewer",
                 "mcu-debug.rtos-views",
                 "ms-vscode.hexeditor",
-                "ms-vscode.cmake-tools",
                 "ms-vscode.makefile-tools",
                 "probe-rs.probe-rs-debugger",
                 "rioj7.command-variable",
@@ -51,7 +50,6 @@
                     "--background-index",
                     "--clang-tidy",
                     "--header-insertion=iwyu",
-                    "--compile-commands-dir=${workspaceFolder}/build/Debug",
                     "--log=error"
                 ],
                 // Отключаем встроенный IntelliSense от ms-vscode.cpptools, чтобы не конфликтовал с clangd

@@ -58,10 +58,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         gdb-multiarch \
         build-essential \
     && update-alternatives --install /usr/bin/clangd       clangd       /usr/bin/clangd-17       100 \
+    && update-alternatives --install /usr/bin/clang        clang        /usr/bin/clang-17       100 \
     && update-alternatives --install /usr/bin/clang-tidy   clang-tidy   /usr/bin/clang-tidy-17   100 \
     && update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-17 100 \
     && pip3 install --no-cache-dir cmake-format==0.6.13 \
     && ln -s /usr/bin/clangd /usr/local/bin/clangd \
+    && ln -s /usr/bin/clang  /usr/local/bin/clang \
     && rm -rf /var/lib/apt/lists/*
 
 

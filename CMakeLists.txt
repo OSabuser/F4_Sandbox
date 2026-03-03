@@ -105,5 +105,5 @@ add_custom_command(
   COMMAND ${CMAKE_OBJCOPY} -O ihex $<TARGET_FILE:${CMAKE_PROJECT_NAME}>
           ${PROJECT_SOURCE_DIR}/build/${CMAKE_PROJECT_NAME}.hex
   COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/compile_commands.json
-          ${PROJECT_SOURCE_DIR}/compile_commands.json
+          ${PROJECT_SOURCE_DIR}/build/compile_commands.json
   COMMENT "Building ${CMAKE_PROJECT_NAME}.bin and ${CMAKE_PROJECT_NAME}.hex")
