@@ -1,0 +1,9 @@
+[submodule "ThirdParty/Unity"]
+	path = ThirdParty/Unity
+	url = https://github.com/ThrowTheSwitch/Unity.git
+[submodule "ThirdParty/SEGGER/RTT"]
+	path = ThirdParty/SEGGER/RTT
+	url = https://github.com/SEGGERMicro/RTT
+[submodule "ThirdParty/fff"]
+	path = ThirdParty/fff
+	url = https://github.com/meekrosoft/fff

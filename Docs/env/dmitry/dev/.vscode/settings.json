@@ -1,0 +1,31 @@
+{
+    "editor.formatOnSave": true,
+    "files.associations": {
+        "*.h": "c",
+        "*.c": "c"
+    },
+    "stm32.chip": "STM32F407VE",
+    // clangd
+    "clangd.path": "/usr/local/bin/clangd",
+    "clangd.arguments": [
+        "--query-driver=/opt/arm-toolchain/bin/arm-none-eabi-*",
+        "--background-index",
+        "--clang-tidy",
+        "--header-insertion=iwyu",
+        "--log=error"
+    ],
+    // clang-format
+    "clang-format.executable": "clang-format",
+    "[c]": {
+        "editor.defaultFormatter": "xaver.clang-format"
+    },
+    // cmake-format
+    "cmakeFormat.exePath": "cmake-format",
+    "[cmake]": {
+        "editor.defaultFormatter": "cheshirekow.cmake-format"
+    },
+    // Отключаем автоскачивание clangd — он уже есть в контейнере
+    "clangd.checkUpdates": false,
+    // Запрещаем STM32 extension управлять clangd
+    "stm32-vscode-extension.enableClangd": false
+}

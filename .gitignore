@@ -1,52 +1,17 @@
-# Prerequisites
-*.d
+# Сборка и бинарники
+config_default/
+Debug/
+Release/
+build*
+Testing/
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
-
-# Linker output
-*.ilk
-*.map
-*.exp
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
-
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+# Файлы настройки среды разработки
+.project
+.vscode/
+STM32F407.svd
+compile_commands.json
+# .clang*
+.cache/
+# .devcontainer/
+.DS_Store
+!Docs/env/dmitry/dev/*

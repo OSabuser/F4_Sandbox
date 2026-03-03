@@ -1,0 +1,43 @@
+# Для тестов, подхватываем compile_commands для host
+If:
+  PathMatch: "Tests/host/.*\\.c"
+CompileFlags:
+  CompilationDatabase: build-host-debug
+
+---
+# Для всего кроме тестов, подхватываем compile_commands для target
+If:
+  PathExclude: "Tests/host/.*\\.c"
+CompileFlags:
+  CompilationDatabase: .
+
+---
+# Не ругаемся на нарушения правил нейминга в тестах
+If:
+  PathMatch: "Tests/.*\\.c"
+Diagnostics:
+  ClangTidy:
+    Remove:
+      - readability-identifier-naming
+
+---
+
+Index:
+  Background: Build
+Diagnostics:
+  ClangTidy:
+    Add:
+      - bugprone-*
+      - clang-analyzer-*
+      - performance-*
+      - readability-*
+      - portability-*
+    Remove:
+      - readability-magic-numbers
+      - readability-isolate-declaration
+      - bugprone-easily-swappable-parameters
+  UnusedIncludes: Strict
+InlayHints:
+  Enabled: true
+  ParameterNames: true
+  DeducedTypes: true
