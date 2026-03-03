@@ -5,6 +5,7 @@
     },
     "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
     "workspaceFolder": "/workspace",
+    "postCreateCommand": "cmake --preset host-debug && cmake --preset Debug",
     "customizations": {
         "vscode": {
             "extensions": [
